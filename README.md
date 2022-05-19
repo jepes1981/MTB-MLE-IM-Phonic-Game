@@ -5,3 +5,5 @@ A CSS boilerplate was used (https://html5boilerplate.com/ ) to maximize compatib
 
 logic is primarily done using vanilla javascript. The code is not optimized since I am just new to the programming language.
 
+to use, you can download https://github.com/jepes1981/MTB-MLE-IM-Phonic-Game/archive/refs/tags/project.zip, extract it in a directory and doubleclick on index.html.
+
