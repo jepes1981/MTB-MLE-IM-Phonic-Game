@@ -1,0 +1,297 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <!--<link rel="manifest" href="../site.webmanifest">-->
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!-- Add your site or application content here -->
+  <script>
+    let alphabetdict = {
+      0: "A",
+      1: "B",
+      2: "C",
+      3: "D",
+      4: "E",
+      5: "F",
+      6: "G",
+      7: "H",
+      8: "I",
+      9: "J",
+      10: "K",
+      11: "L",
+      12: "M",
+      13: "N",
+      14: "O",
+      15: "P",
+      16: "Q",
+      17: "R",
+      18: "S",
+      19: "T",
+      20: "U",
+      21: "V",
+      22: "W",
+      23: "X",
+      24: "Y",
+      25: "Z"
+    };
+    let alphasounddict = {
+      0: "../snd/A.mp3",
+      1: "../snd/B.mp3",
+      2: "../snd/C.mp3",
+      3: "../snd/D.mp3",
+      4: "../snd/E.mp3",
+      5: "../snd/F.mp3",
+      6: "../snd/G.mp3",
+      7: "../snd/H.mp3",
+      8: "../snd/I.mp3",
+      9: "../snd/J.mp3",
+      10: "../snd/K.mp3",
+      11: "../snd/L.mp3",
+      12: "../snd/M.mp3",
+      13: "../snd/N.mp3",
+      14: "../snd/O.mp3",
+      15: "../snd/P.mp3",
+      16: "../snd/Q.mp3",
+      17: "../snd/R.mp3",
+      18: "../snd/S.mp3",
+      19: "../snd/T.mp3",
+      20: "../snd/U.mp3",
+      21: "../snd/V.mp3",
+      22: "../snd/W.mp3",
+      23: "../snd/X.mp3",
+      24: "../snd/Y.mp3",
+      25: "../snd/Z.mp3",
+
+
+    }
+    alphabetIndex = 0;
+
+  </script>
+
+  <h1 id="letterText">ERROR</h1>
+  <img id="correctImg" style=" display: block; margin: 0 auto; max-width: 100%; position: fixed; top: 30%; left: 50%; margin-top: -50px; margin-left: -100px;" src="../img/correct.png" alt="Correct!" width="300vh" height="300vh">
+  <img id="incorrectImg" style=" display: block; margin: 0 auto; max-width: 100%; position: fixed; top: 30%; left: 50%; margin-top: -50px; margin-left: -150px;" src="../img/error.png" alt="Incorrect!" width="300vh" height="300vh">
+  <div class="buttons" id="buttons">
+    <input type="radio" id="sndbutton1IDradio" name="soundradioselection" style="-ms-transform: scale(2); -webkit-transform: scale(2); transform: scale(2);" value=0>
+    <button id="sndbutton1ID" class="soundbutton1" onclick="btnsound(arrSndIndex[0],arrSnd)"><img width="42" height="42" style="vertical-align:bottom" src="../img/loudspeaker.png" /></button> <br />
+    <input type="radio" id="sndbutton2IDradio" name="soundradioselection" style="-ms-transform: scale(2); -webkit-transform: scale(2); transform: scale(2);" value=1>
+    <button id="sndbutton2ID" class="soundbutton2" onclick="btnsound(arrSndIndex[1],arrSnd)"><img width="42" height="42" style="vertical-align:bottom" src="../img/loudspeaker.png" /></button> <br />
+    <input type="radio" id="sndbutton3IDradio" name="soundradioselection" style="-ms-transform: scale(2); -webkit-transform: scale(2); transform: scale(2);" value=2>
+    <button id="sndbutton3ID" class="soundbutton3" onclick="btnsound(arrSndIndex[2], arrSnd)"><img width="42" height="42" style="vertical-align:bottom" src="../img/loudspeaker.png" /></button> <br />
+    <div> <button id="answerbutton" class="soundbuttonSubmit" onclick="alamin()"> Alamin!</button></div>
+  </div>
+
+
+  <script>
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
+    }
+
+
+    function btnsound(sndIndex, btnsoundarrSnd) {
+      var audioElement;
+      if (!audioElement) {
+        audioElement = document.createElement('audio');
+        audioElement.innerHTML = '<source src="' + "../snd/" + alphabetdict[sndIndex] + ".mp3" + '" type="audio/mpeg" />'
+      }
+      audioElement.play();
+    }
+
+    function alamin() {
+      var radioslength = document.querySelector('input[name = "soundradioselection"]:checked');
+      console.log(radioslength);
+      if (radioslength != null) {
+        //alert(radioslength.value);
+        for (let i = 0; i < 3; i++) {
+          if (arrSnd[i] == 0) {
+            if (radioslength.value == i) {
+              correctAnswer();
+            } else {
+              incorrectAnswer();
+            }
+          }
+        }
+      } else {
+        alert("Pumili ng kasagutan.");
+      }
+
+    }
+
+    function correctAnswer() {
+      document.getElementById("buttons").style.display = "none";
+      document.getElementById("correctImg").style.display = "initial";
+      /* document.getElementById("answerbutton").style.display = "none";
+       document.getElementById("sndbutton1IDradio").style.display = "none";
+       document.getElementById("sndbutton1ID").style.display = "none";
+       document.getElementById("sndbutton2IDradio").style.display = "none";
+       document.getElementById("sndbutton2ID").style.display = "none";
+       document.getElementById("sndbutton3IDradio").style.display = "none";
+       document.getElementById("sndbutton3ID").style.display = "none"; */
+      var audioElement;
+      if (!audioElement) {
+        audioElement = document.createElement('audio');
+        audioElement.innerHTML = '<source src="' + "../snd/yehey.mp3" + '" type="audio/mpeg" />';
+      }
+      audioElement.play();
+
+
+      alphabetIndex++;
+
+
+      setTimeout(() => {
+        document.getElementById("buttons").style.display = "initial";
+        document.getElementById("correctImg").style.display = "none";
+        /*document.getElementById("answerbutton").style.display = "initial";
+        document.getElementById("sndbutton1IDradio").style.display = "initial";
+        document.getElementById("sndbutton1ID").style.display = "initial";
+        document.getElementById("sndbutton2IDradio").style.display = "initial";
+        document.getElementById("sndbutton2ID").style.display = "initial";
+        document.getElementById("sndbutton3IDradio").style.display = "initial";
+        document.getElementById("sndbutton3ID").style.display = "initial";*/
+
+
+        // got to end page when all letter of the alphabet has been answered
+        if (alphabetIndex == 26) {
+          window.location.href = "end.html";
+        }
+        startRunning();
+      }, 4000);
+
+
+
+    }
+
+    function incorrectAnswer() {
+      document.getElementById("buttons").style.display = "none";
+      document.getElementById("incorrectImg").style.display = "initial";
+      /*document.getElementById("answerbutton").style.display = "none";
+      document.getElementById("sndbutton1IDradio").style.display = "none";
+      document.getElementById("sndbutton1ID").style.display = "none";
+      document.getElementById("sndbutton2IDradio").style.display = "none";
+      document.getElementById("sndbutton2ID").style.display = "none";
+      document.getElementById("sndbutton3IDradio").style.display = "none";
+      document.getElementById("sndbutton3ID").style.display = "none";*/
+      var audioElement;
+      if (!audioElement) {
+        audioElement = document.createElement('audio');
+        audioElement.innerHTML = '<source src="' + "../snd/error.mp3" + '" type="audio/mpeg" />'
+      }
+      audioElement.play();
+      clearRadio();
+      setTimeout(() => {
+        document.getElementById("buttons").style.display = "initial";
+        document.getElementById("incorrectImg").style.display = "none";
+        /*document.getElementById("answerbutton").style.display = "initial";
+        document.getElementById("sndbutton1IDradio").style.display = "initial";
+        document.getElementById("sndbutton1ID").style.display = "initial";
+        document.getElementById("sndbutton2IDradio").style.display = "initial";
+        document.getElementById("sndbutton2ID").style.display = "initial";
+        document.getElementById("sndbutton3IDradio").style.display = "initial";
+        document.getElementById("sndbutton3ID").style.display = "initial";*/
+        var audioElement;
+
+      }, 2000);
+    }
+
+
+    function clearRadio() {
+      const btn1 = document.getElementById("sndbutton1IDradio");
+      const btn2 = document.getElementById("sndbutton2IDradio");
+      const btn3 = document.getElementById("sndbutton3IDradio");
+      btn1.checked = false;
+      btn2.checked = false;
+      btn3.checked = false;
+
+
+    }
+
+    function startRunning() {
+      document.getElementById("correctImg").style.display = "none";
+      document.getElementById("incorrectImg").style.display = "none";
+
+      shuffle(arrSnd);
+
+
+      //assign the alphabet to a button and other random alphabet to other buttons. Results should be unique each time.
+      do {
+        for (var i = 0; i < 3; i++) {
+          if (arrSnd[i] == 0) {
+            arrSndIndex[i] = alphabetIndex;
+          }
+          else {
+            arrSndIndex[i] = Math.floor(Math.random() * 26);
+            while (arrSndIndex[i] == alphabetIndex) {
+              arrSndIndex[i] = Math.floor(Math.random() * 26);
+            }
+
+          }
+        }
+         notUnique = arrSndIndex[0] == arrSndIndex[1] || arrSndIndex[0] == arrSndIndex[2] || arrSndIndex[1] == arrSndIndex[2];
+         c_k_found = arrSndIndex.includes(2) && arrSndIndex.includes(10);
+      } while (notUnique || c_k_found);
+
+
+      console.log(arrSndIndex);
+      document.getElementById("letterText").textContent = alphabetdict[alphabetIndex];
+      clearRadio();
+    }
+
+    let arrSnd = [0, 1, 2];
+    let arrSndIndex = [0, 1, 2]
+    let notUnique = true;
+    let c_k_found = true;
+    startRunning()
+
+              //document.getElementById("sndbutton1ID").textContent = arrSnd[0];
+              //document.getElementById("sndbutton2ID").textContent = arrSnd[1];
+              //document.getElementById("sndbutton3ID").textContent = arrSnd[2];
+
+  </script>
+
+  <script src="../js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="../js/plugins.js"></script>
+  <script src="../js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <!-- <script>
+      window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+      ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async></script>
+    -->
+</body>
+
+</html>
