@@ -14,3 +14,7 @@ The codes are found in:
 
 to use, you can download https://github.com/jepes1981/MTB-MLE-IM-Phonic-Game/archive/refs/tags/project.zip, extract it in a directory and doubleclick on index.html.
 
+As the selected license indicated that this is free to use and modify but will need to link back to this github page.
+
+Also check my website for my portfolio: https://sites.google.com/view/jeffcruz/home
+
